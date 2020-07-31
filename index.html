@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Manager</title>
+    <script src="js/Product.js"></script>
+    <script src="js/ProductManage.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form>
+    <div class="form-group">
+        <input class="form-control" id="id-product" placeholder="ID product">
+        <input class="form-control" id="name-product" placeholder="Name product">
+        <input class="form-control" id="price-product" placeholder="Price product">
+        <input class="form-control" id="quantity-product" placeholder="Quantity product">
+        <input class="form-control" id="desc-product" placeholder="Description product">
+        <input class="form-control" id="img-product" placeholder="Image product">
+        <button class="btn-primary" type="button" onclick="addProduct()">Add</button>
+    </div>
+</form>
+<div id="product-manage">
+    <table id="tbl-products" cellspacing="0"></table>
+</div>
+
+<script>
+
+    let productManage = new ProductManage();
+
+
+    function showAll() {
+        document.getElementById("tbl-products").innerHTML = productManage.getAllProduct();
+    }
+
+
+    function addProduct() {
+        let id = getElementValue("id");
+        let name = getElementValue("name");
+        let price = getElementValue("price");
+        let quantity = getElementValue("quantity");
+        let desc = getElementValue("desc");
+        let img = getElementValue("img");
+
+        let product = new Product(id, name, price, quantity, desc, img);
+        productManage.addProduct(product);
+        showAll();
+    }
+
+    function getElementValue(id) {
+        return document.getElementById(id + "-product").value;
+    }
+</script>
+</body>
+</html>

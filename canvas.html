@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Demo</title>
+    <script src="Circle.js"></script>
+</head>
+<style>
+    canvas#my-canvas {
+        border: 1px solid;
+        background-color: lightgrey;
+    }
+</style>
+<body>
+<canvas id="my-canvas" width="500px" height="500px"></canvas>
+</body>
+<script>
+    let canvas = document.getElementById("my-canvas");
+    let circle1 = new Circle(100,100,50,3);
+    let circle2 = new Circle(200,100,20,7);
+    let circle3 = new Circle(300,100,80,5);
+    let circles = [circle1,circle2,circle3];
+    function move() {
+        clearScreen();
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].move();
+            circles[i].draw(canvas);
+        }
+    }
+
+    function clearScreen(){
+        let ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+
+    function main() {
+        move();
+        requestAnimationFrame(main);
+    }
+    main();
+</script>
+</html>
